@@ -1,5 +1,5 @@
 export const getResourceConnectionString = (): string => {
-    const resourceConnectionString = process.env.RESOURCE_CONNECTION_STRING;
+    const resourceConnectionString = process.env.NEXT_PUBLIC_RESOURCE_CONNECTION_STRING;
   
     if (!resourceConnectionString) {
       throw new Error('No ACS connection string provided');
@@ -9,7 +9,7 @@ export const getResourceConnectionString = (): string => {
   };
   
   export const getEndpoint = (): string => {
-    const endpointUrl = process.env.ENDPOINT_URL;
+    const endpointUrl = process.env.NEXT_PUBLIC_ENDPOINT_URL;
   
     if (!endpointUrl) {
       throw new Error('No ACS endpoint URL provided');
@@ -19,7 +19,7 @@ export const getResourceConnectionString = (): string => {
   };
   
   export const getAdminUserId = (): string => {
-    const adminUserId = process.env.ADMIN_USER_ID;
+    const adminUserId = process.env.NEXT_PUBLIC_ADMIN_USER_ID;
   
     if (!adminUserId) {
       throw new Error('No ACS Admin UserId provided');

@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
-
+"use client"
 
 
 import {
@@ -93,11 +93,10 @@ export default (): JSX.Element => {
       console.error('Failed to create a thread, returned threadId is undefined or empty string');
       return;
     } else {
-     
+      if (typeof window !== 'undefined') {
         window.location.href += `?threadId=${threadId}`;
-
     } 
-    
+  }
   };
 
   const displayLoadingSpinner = (spinnerLabel: string): JSX.Element => {
