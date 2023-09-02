@@ -39,7 +39,7 @@ import { useTheme } from '@azure/communication-react';
 import { Chat20Filled } from '@fluentui/react-icons';
 
 import { getExistingThreadIdFromURL } from '../../pages/api/getParametersFromURL';
-import { createThread } from '../../pages/api/createThread';
+import { createThread } from '@/pages/api/createThread';
 // import { ThemeSelector } from '../../theming/ThemeSelector';
 // import { useSwitchableFluentTheme } from '../../theming/SwitchableFluentThemeProvider';
 
@@ -60,6 +60,9 @@ const HOMESCREEN_SHOWING_LOADING_SPINNER_CREATE_THREAD = 2;
  *
  * @param props
  */
+
+
+
 export default (): JSX.Element => {
   const spinnerLabel = 'Creating a new chat thread...';
   const iconName = 'SkypeCircleCheck';
@@ -75,7 +78,6 @@ export default (): JSX.Element => {
   const [homeScreenState, setHomeScreenState] = useState<number>(HOMESCREEN_SHOWING_START_CHAT_BUTTON);
   // const { currentTheme } = useSwitchableFluentTheme();
 
- 
 
   const onCreateThread = async (): Promise<void> => {
     const exisitedThreadId = getExistingThreadIdFromURL();
