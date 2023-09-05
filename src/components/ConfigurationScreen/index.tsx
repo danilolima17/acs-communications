@@ -42,6 +42,7 @@ import {
 } from '../../utils/getParametersFromURL';
 import { joinThread } from '../../utils/joinThread';
 import { getEndpointUrl } from '../../utils/getEndpointUrl';
+import { useRouter } from 'next/router';
 
 // These props are set by the caller of ConfigurationScreen in the JSX and not found in context
 export interface ConfigurationScreenProps {
@@ -90,10 +91,12 @@ export default (props: ConfigurationScreenProps): JSX.Element => {
   const theme = useTheme();
   const { joinChatHandler, setToken, setUserId, setDisplayName, setThreadId, setEndpointUrl } = props;
 
+  const router = useRouter();
+
   // Used when new user is being registered.
   const setupAndJoinChatThreadWithNewUser = useCallback(() => {
     const internalSetupAndJoinChatThread = async (): Promise<void> => {
-      const threadId = getExistingThreadIdFromURL();
+      const threadId = getExistingThreadIdFromURL(router.query);
       const token = await getToken();
       const endpointUrl = await getEndpointUrl();
 
@@ -141,7 +144,7 @@ export default (props: ConfigurationScreenProps): JSX.Element => {
     if (configurationScreenState === CONFIGURATIONSCREEN_SHOWING_SPINNER_LOADING) {
       const setScreenState = async (): Promise<void> => {
         try {
-          const threadId = getExistingThreadIdFromURL();
+          const threadId = getExistingThreadIdFromURL(router.query);
           if (!threadId) {
             throw new Error(ERROR_TEXT_THREAD_NOT_RECORDED);
           }
@@ -150,9 +153,9 @@ export default (props: ConfigurationScreenProps): JSX.Element => {
           return;
         }
         // Check if we have all the required parameters supplied as query search params.
-        const threadId = getExistingThreadIdFromURL();
+        const threadId = getExistingThreadIdFromURL(router.query);
         const token = getExistingTokenFromURL();
-        const userId = getExistingUserIdFromURL();
+        const userId = getExistingUserIdFromURL(router.query);
         const displayName = getExistingDisplayNameFromURL();
         const endpointUrl = getExistingEndpointURLFromURL();
 

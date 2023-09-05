@@ -6,7 +6,7 @@ export const createThread = async (): Promise<string> => {
     const requestOptions = {
       method: 'POST'
     };
-    const response = await fetch('/createThread', requestOptions);
+    const response = await fetch('http://localhost:8080/createThread', requestOptions);
     if (response.status === StatusCode.OK) {
       return await response.text();
     } else {

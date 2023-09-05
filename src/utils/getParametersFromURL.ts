@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
+
 /**
  *
  * The threadId of the current thread is extracted from the url
@@ -10,12 +11,27 @@
  *
  */
 
-export const getExistingThreadIdFromURL = (): string | null => {
-    const urlParams = new URLSearchParams();
-    const threadId = urlParams.get('threadId');
+
+// export const getExistingThreadIdFromURL = (): string | null => {
+//     const urlParams = new URLSearchParams();
+//     const threadId = urlParams.get('threadId');
+//     console.log(threadId)
   
-    return threadId;
-  };
+//     return threadId;
+//   };
+
+import { ParsedUrlQuery } from 'querystring';
+
+export const getExistingThreadIdFromURL = (query: ParsedUrlQuery): string | null => {
+  const threadId = query?.threadId;
+  
+  if (Array.isArray(threadId)) {
+    return threadId[0];
+  }
+
+
+  return threadId || null;
+};
   
   /**
    *
@@ -26,11 +42,14 @@ export const getExistingThreadIdFromURL = (): string | null => {
    *
    */
   
-  export const getExistingUserIdFromURL = (): string | null => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get('userId');
-  
-    return userId;
+  export const getExistingUserIdFromURL = (query: ParsedUrlQuery): string | null => {
+    const userId = query?.userId
+    
+    if (Array.isArray(userId)) {
+      return userId[0];
+    }
+
+    return userId || null;
   };
   
   /**

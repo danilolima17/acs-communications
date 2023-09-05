@@ -9,7 +9,7 @@ const getEmoji = (userId: string): Promise<string> => {
     method: 'GET'
   };
   return new Promise<string>((resolve) => {
-    fetch('/userConfig/' + userId, getTokenRequestOptions)
+    fetch('http://localhost:8080/userConfig/' + userId, getTokenRequestOptions)
       .then((data) => {
         return data.json();
       })

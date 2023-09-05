@@ -3,8 +3,10 @@
 
 // const appSettings = require('../../appsettings.json');
 
+import 'dotenv/config';
+
 export const getResourceConnectionString = (): string => {
-  const resourceConnectionString = process.env.NEXT_PUBLIC_RESOURCE_CONNECTION_STRING;
+  const resourceConnectionString = process.env.RESOURCE_CONNECTION_STRING;
 
   if (!resourceConnectionString) {
     throw new Error('No ACS connection string provided');
@@ -14,12 +16,12 @@ export const getResourceConnectionString = (): string => {
 };
 
 export const getEndpoint = (): string => {
-  const uri = new URL(process.env.NEXT_PUBLIC_ENDPOINT_URL);
+  const uri = new URL(process.env.ENDPOINT_URL);
   return `${uri.protocol}//${uri.host}`;
 };
 
 export const getAdminUserId = (): string => {
-  const adminUserId = process.env.NEXT_PUBLIC_ADMIN_USER_ID;
+  const adminUserId = process.env.ADMIN_USER_ID;
 
   if (!adminUserId) {
     throw new Error('No ACS Admin UserId provided');

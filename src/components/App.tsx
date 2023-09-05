@@ -12,6 +12,9 @@ import { ErrorScreen } from '../components/ErrorScreen';
 import HomeScreen from '../components/HomeScreen';
 import { getExistingThreadIdFromURL } from '../utils/getParametersFromURL';
 import { initializeFileTypeIcons } from '@fluentui/react-file-type-icons';
+import router, { useRouter } from 'next/router';
+import { threadId } from 'worker_threads';
+
 
 
 setLogLevel('verbose');
@@ -30,6 +33,13 @@ export default (): JSX.Element => {
   const [displayName, setDisplayName] = useState('');
   const [threadId, setThreadId] = useState('');
   const [endpointUrl, setEndpointUrl] = useState('');
+  const router = useRouter();
+
+
+  const id = getExistingThreadIdFromURL(router.query);
+
+  console.log(id)
+  console.log(threadId)
 
 
   const renderPage = (): JSX.Element => {
@@ -112,9 +122,8 @@ export default (): JSX.Element => {
     }
   };
 
-  if (getExistingThreadIdFromURL() && page === 'home') {
+  if (id && page === 'home') {
     setPage('configuration');
   }
-
   return renderPage();
 };

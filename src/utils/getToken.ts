@@ -14,7 +14,7 @@ export type UserToken = {
     const getTokenRequestOptions = {
       method: 'POST'
     };
-    const getTokenResponse = await fetch('/token?scope=chat', getTokenRequestOptions);
+    const getTokenResponse = await fetch('http://localhost:8080/token?scope=chat', getTokenRequestOptions);
     const responseJson = await getTokenResponse.json();
     return {
       expiresOn: responseJson.expiresOn,

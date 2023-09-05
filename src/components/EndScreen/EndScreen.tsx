@@ -18,6 +18,7 @@ import {
 import { Chat20Filled } from '@fluentui/react-icons';
 import { getExistingThreadIdFromURL } from '../../utils/getParametersFromURL';
 import { joinThread } from '../../utils/joinThread';
+import { useRouter } from 'next/router';
 
 export interface EndCallProps {
   userId: string;
@@ -32,13 +33,15 @@ export const EndScreen = (props: EndCallProps): JSX.Element => {
   const rejoinChat = 'Rejoin chat';
   const rejoining = 'Rejoining...';
 
+  const router = useRouter();
+
   const [isRejoiningThread, setIsRejoiningThread] = useState(false);
 
   const { rejoinHandler, userId, displayName } = props;
 
   const rejoinThread = useCallback(async (): Promise<void> => {
     if (!isRejoiningThread) {
-      const threadId = getExistingThreadIdFromURL();
+      const threadId = getExistingThreadIdFromURL(router.query);
       if (!threadId) {
         console.error('thread id is null');
         return;

@@ -40,6 +40,7 @@ import { Chat20Filled } from '@fluentui/react-icons';
 
 import { getExistingThreadIdFromURL } from '../../utils/getParametersFromURL';
 import { createThread } from "../../utils/createThread"
+import { useRouter } from 'next/router';
 // import { ThemeSelector } from '../../theming/ThemeSelector';
 // import { useSwitchableFluentTheme } from '../../theming/SwitchableFluentThemeProvider';
 
@@ -77,10 +78,10 @@ export default (): JSX.Element => {
 
   const [homeScreenState, setHomeScreenState] = useState<number>(HOMESCREEN_SHOWING_START_CHAT_BUTTON);
   // const { currentTheme } = useSwitchableFluentTheme();
-
+  const router = useRouter()
 
   const onCreateThread = async (): Promise<void> => {
-    const exisitedThreadId = getExistingThreadIdFromURL();
+    const exisitedThreadId = getExistingThreadIdFromURL(router.query);
     setHomeScreenState(HOMESCREEN_SHOWING_LOADING_SPINNER_CREATE_THREAD);
   
     if (typeof window !== 'undefined') {
