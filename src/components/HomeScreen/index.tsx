@@ -38,8 +38,8 @@ import { useTheme } from '@azure/communication-react';
 
 import { Chat20Filled } from '@fluentui/react-icons';
 
-import { getExistingThreadIdFromURL } from '../../pages/api/getParametersFromURL';
-import { createThread } from '@/pages/api/createThread';
+import { getExistingThreadIdFromURL } from '../../utils/getParametersFromURL';
+import { createThread } from "../../utils/createThread"
 // import { ThemeSelector } from '../../theming/ThemeSelector';
 // import { useSwitchableFluentTheme } from '../../theming/SwitchableFluentThemeProvider';
 

@@ -1,22 +1,23 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import * as express from 'express';
-import { getEndpoint } from '../lib/envHelper';
+let endpointUrl: string | undefined;
 
-const router = express.Router();
-
-/**
- * route: /getEndpointUrl/
- *
- * purpose: Get the endpoint url of Azure Communication Services resource.
- *
- * @returns The endpoint url as string
- *
- */
-
-router.get('/', async function (req, res, next) {
-  res.send(getEndpoint());
-});
-
-export default router;
+export const getEndpointUrl = async (): Promise<string> => {
+  if (endpointUrl === undefined) {
+    try {
+      const getRequestOptions = {
+        method: 'GET'
+      };
+      const response = await fetch('/getEndpointUrl', getRequestOptions);
+      const retrievedendpointUrl = await response.text().then((endpointUrl) => endpointUrl);
+      endpointUrl = retrievedendpointUrl;
+      return retrievedendpointUrl;
+    } catch (error) {
+      console.error('Failed at getting environment url, Error: ', error);
+      throw new Error('Failed at getting environment url');
+    }
+  } else {
+    return endpointUrl;
+  }
+};

@@ -17,9 +17,9 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 
 import { ChatHeader } from '../ChatHeader';
 import { chatCompositeContainerStyle, chatScreenContainerStyle } from './styles';
-import { createAutoRefreshingCredential } from '../../pages/api/credential';
-import { fetchEmojiForUser } from '../../pages/api/emojiCache';
-import { getBackgroundColor } from '../../pages/api/utils';
+import { createAutoRefreshingCredential } from '../../utils/credential';
+import { fetchEmojiForUser } from '../../utils/emojiCache';
+import { getBackgroundColor } from '../../utils/utils';
 import { useSwitchableFluentTheme } from '../../theming/SwitchableFluentThemeProvider';
 
 // These props are passed in when this component is referenced in JSX and not found in context

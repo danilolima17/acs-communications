@@ -1,4 +1,3 @@
-import App from '@/components/App'
 import React from 'react'
 
 import dynamic from 'next/dynamic'

@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import { CAT, FOX, KOALA, MONKEY, MOUSE, OCTOPUS } from '../../pages/api/utils';
+import { CAT, FOX, KOALA, MONKEY, MOUSE, OCTOPUS } from '../../utils/utils';
 import { useTheme } from '@azure/communication-react';
 import { FocusZone, FocusZoneDirection, PrimaryButton, Spinner, Stack, Text } from '@fluentui/react';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -31,17 +31,17 @@ import {
 
 import { Chat20Filled } from '@fluentui/react-icons';
 import { DisplayNameField } from '../DisplayNameField/DisplayNameField';
-import { sendEmojiRequest } from '../../pages/api/setEmoji';
-import { getToken } from '../../pages/api/getToken';
+import { sendEmojiRequest } from '../../utils/setEmoji';
+import { getToken } from '../../utils/getToken';
 import {
   getExistingDisplayNameFromURL,
   getExistingEndpointURLFromURL,
   getExistingThreadIdFromURL,
   getExistingTokenFromURL,
   getExistingUserIdFromURL
-} from '../../pages/api/getParametersFromURL';
-import { joinThread } from '../../pages/api/joinThread';
-import { getEndpointUrl } from '../../pages/api/getEndpointUrl';
+} from '../../utils/getParametersFromURL';
+import { joinThread } from '../../utils/joinThread';
+import { getEndpointUrl } from '../../utils/getEndpointUrl';
 
 // These props are set by the caller of ConfigurationScreen in the JSX and not found in context
 export interface ConfigurationScreenProps {

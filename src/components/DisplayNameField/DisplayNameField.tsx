@@ -2,7 +2,7 @@
 // Licensed under the MIT license.
 
 import { TextFieldStyleProps, inputBoxStyle, inputBoxTextStyle } from './styles';
-import { ENTER_KEY } from '../../pages/api/constants';
+import { ENTER_KEY } from '../../utils/constants';
 
 import React from 'react';
 import { TextField } from '@fluentui/react';

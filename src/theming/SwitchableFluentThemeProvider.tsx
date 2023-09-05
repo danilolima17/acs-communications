@@ -4,7 +4,7 @@
 import React, { useState, useMemo, createContext, useContext } from 'react';
 import { FluentThemeProvider, lightTheme, darkTheme } from '@azure/communication-react';
 import { Theme, PartialTheme } from '@fluentui/react';
-import { getThemeFromLocalStorage, saveThemeToLocalStorage } from '../pages/api/localStorage';
+import { getThemeFromLocalStorage, saveThemeToLocalStorage } from '../utils/localStorage';
 
 /**
  * A theme with an associated name.

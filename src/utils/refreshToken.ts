@@ -1,39 +1,19 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import * as express from 'express';
-import { CommunicationUserToken } from '@azure/communication-identity';
-import { CommunicationUserIdentifier } from '@azure/communication-common';
-import { getToken } from '../lib/identityClient';
+import { AbortSignalLike } from '@azure/abort-controller';
 
-const router = express.Router();
+const postRefreshTokenParameters = {
+  method: 'POST'
+};
 
-/**
- * route: /refreshToken/[id]
- *
- * purpose: Get a new token for the given user id.
- *
- * @param id: id of the user
- *
- * @returns the user object with token details
- *
- */
-
-router.post('/:id', async function (req, res, next) {
-  if (!req.params['id']) {
-    res.sendStatus(404);
-  }
-
-  const user: CommunicationUserIdentifier = {
-    communicationUserId: req.params['id'] as string
+export const refreshTokenAsync = (userIdentity: string): ((abortSignal?: AbortSignalLike) => Promise<string>) => {
+  return async (): Promise<string> => {
+    const response = await fetch(`/refreshToken/${userIdentity}`, postRefreshTokenParameters);
+    if (response.ok) {
+      return (await response.json()).token;
+    } else {
+      throw new Error('could not refresh token');
+    }
   };
-  const token = await getToken(user, ['chat', 'voip']);
-  const userToken: CommunicationUserToken = {
-    user,
-    ...token
-  };
-
-  res.send(userToken);
-});
-
-export default router;
+};

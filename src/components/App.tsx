@@ -10,7 +10,7 @@ import ConfigurationScreen from '../components/ConfigurationScreen';
 import { EndScreen } from '../components/EndScreen/EndScreen';
 import { ErrorScreen } from '../components/ErrorScreen';
 import HomeScreen from '../components/HomeScreen';
-import { getExistingThreadIdFromURL } from '../pages/api/getParametersFromURL';
+import { getExistingThreadIdFromURL } from '../utils/getParametersFromURL';
 import { initializeFileTypeIcons } from '@fluentui/react-file-type-icons';
 
 

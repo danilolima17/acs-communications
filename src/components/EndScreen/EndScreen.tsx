@@ -16,8 +16,8 @@ import {
 } from './styles';
 
 import { Chat20Filled } from '@fluentui/react-icons';
-import { getExistingThreadIdFromURL } from '../../pages/api/getParametersFromURL';
-import { joinThread } from '../../pages/api/joinThread';
+import { getExistingThreadIdFromURL } from '../../utils/getParametersFromURL';
+import { joinThread } from '../../utils/joinThread';
 
 export interface EndCallProps {
   userId: string;
