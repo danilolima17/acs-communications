@@ -10,17 +10,23 @@ import {
   ChatComposite,
   fromFlatCommunicationIdentifier,
   toFlatCommunicationIdentifier,
-  useAzureCommunicationChatAdapter
+  useAzureCommunicationChatAdapter,
+  FileSharingMessage
 } from '@azure/communication-react';
 import { Stack } from '@fluentui/react';
 import React, { useCallback, useEffect, useMemo } from 'react';
 
 import { ChatHeader } from '../ChatHeader';
-import { chatCompositeContainerStyle, chatScreenContainerStyle } from './styles';
+import { Footer, chatCompositeContainerStyle, chatScreenContainerStyle } from './styles';
 import { createAutoRefreshingCredential } from '../../utils/credential';
 import { fetchEmojiForUser } from '../../utils/emojiCache';
 import { getBackgroundColor } from '../../utils/utils';
 import { useSwitchableFluentTheme } from '../../theming/SwitchableFluentThemeProvider';
+import { Users, Question, VideoCamera } from 'phosphor-react';
+import { People20Filled, People20Regular } from '@fluentui/react-icons';
+import { useTheme } from '@azure/communication-react';
+import { IconButton, mergeStyles } from '@fluentui/react';
+import FooterContainer from '../Footer';
 
 // These props are passed in when this component is referenced in JSX and not found in context
 interface ChatScreenProps {
@@ -30,10 +36,20 @@ interface ChatScreenProps {
   endpointUrl: string;
   threadId: string;
   endChatHandler(isParticipantRemoved: boolean): void;
+ 
 }
 
-export const ChatScreen = (props: ChatScreenProps): JSX.Element => {
+export type PeopleButtonProps = {
+  isParticipantsDisplayed: boolean;
+  setHideParticipants(hideParticipants: boolean): void;
+};
+
+
+export const ChatScreen = (props: ChatScreenProps & PeopleButtonProps): JSX.Element => {
   const { displayName, endpointUrl, threadId, token, userId, endChatHandler } = props;
+  const theme = useTheme();
+  const participantListExpandedString = 'Participants list Button Expanded';
+  const participantListCollapsedString = 'Participants list Button Collapsed';
 
   // Disables pull down to refresh. Prevents accidental page refresh when scrolling through chat messages
   // Another alternative: set body style touch-action to 'none'. Achieves same result.
@@ -62,6 +78,22 @@ export const ChatScreen = (props: ChatScreenProps): JSX.Element => {
     },
     [endChatHandler, userId]
   );
+
+  const handleFileUpload = async (file: File) => {
+    try {
+      if (adapter) {
+        const fileSharingMessage: FileSharingMessage = {
+          content: file, // O arquivo a ser enviado
+          type: 'image/png', // O tipo de arquivo (por exemplo, 'image/png' para imagens PNG)
+          displayName: file.name // O nome do arquivo a ser exibido no chat
+        };
+        await adapter.sendMessage({ content: fileSharingMessage });
+      }
+    } catch (error) {
+      console.error('Erro ao enviar o arquivo:', error);
+    }
+  };
+  
 
   const adapterArgs = useMemo(
     () => ({
@@ -96,19 +128,36 @@ export const ChatScreen = (props: ChatScreenProps): JSX.Element => {
           })
       );
     return (
+      <>
       <Stack className={chatScreenContainerStyle}>
         <Stack.Item className={chatCompositeContainerStyle} role="main">
+         
+          <div>
+           
           <ChatComposite
             adapter={adapter}
-            fluentTheme={currentTheme.theme}
+            
             options={{
               autoFocus: 'sendBoxTextField'
             }}
             onFetchAvatarPersonaData={onFetchAvatarPersonaData}
+                     
           />
+          </div>
+ 
         </Stack.Item>
+
         <ChatHeader onEndChat={() => adapter.removeParticipant(userId)} />
+        
       </Stack>
+     
+      <IconButton
+      onRenderIcon={() => (props.isParticipantsDisplayed ? <People20Filled /> : <People20Regular />)}
+      className={mergeStyles({ color: theme.palette.neutralPrimaryAlt })}
+      onClick={() => props.setHideParticipants(props.isParticipantsDisplayed)}
+      ariaLabel={props.isParticipantsDisplayed ? participantListExpandedString : participantListCollapsedString}
+    />     
+      </>
     );
   }
   return <>Initializing...</>;

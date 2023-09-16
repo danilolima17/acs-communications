@@ -36,10 +36,12 @@ export default (): JSX.Element => {
   const router = useRouter();
 
 
+
   const id = getExistingThreadIdFromURL(router.query);
 
   console.log(id)
   console.log(threadId)
+  console.log(displayName)
 
 
   const renderPage = (): JSX.Element => {
@@ -73,14 +75,16 @@ export default (): JSX.Element => {
               displayName={displayName}
               endpointUrl={endpointUrl}
               threadId={threadId}
+              setHideParticipants={() => {
+                alert("Olá");
+              } }
               endChatHandler={(isParticipantRemoved) => {
                 if (isParticipantRemoved) {
                   setPage('removed');
                 } else {
                   setPage('end');
                 }
-              }}
-            />
+              } } isParticipantsDisplayed={true}            />
           );
         }
 
@@ -121,6 +125,7 @@ export default (): JSX.Element => {
         throw new Error('Page type not recognized');
     }
   };
+
 
   if (id && page === 'home') {
     setPage('configuration');

@@ -26,12 +26,15 @@
     "express": "^4.18.2",
     "morgan": "^1.10.0",
     "next": "13.4.19",
+    "phosphor-react": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "shake.js": "^1.2.2",
+    "styled-components": "^6.0.7",
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@types/cookie-parser": "^1.4.3"
+    "@types/cookie-parser": "^1.4.3",
+    "babel-plugin-styled-components": "^2.1.4"
   }
 }

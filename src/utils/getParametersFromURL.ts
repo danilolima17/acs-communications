@@ -61,14 +61,23 @@ export const getExistingThreadIdFromURL = (query: ParsedUrlQuery): string | null
    *
    */
   
-  export const getExistingTokenFromURL = (): string | null => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const userId = urlParams.get('userId');
-      return userId;
-    }
+  export const getExistingTokenFromURL = (query: ParsedUrlQuery): string | null => {
+    // if (typeof window !== 'undefined') {
+    //   const urlParams = new URLSearchParams(window.location.search);
+    //   const userId = urlParams.get('userId');
+    //   return userId;
+    // }
   
-    return null;
+    // return null;
+
+    const userId = query?.userId;
+  
+    if (Array.isArray(userId)) {
+    return userId[0];
+  }
+
+
+    return userId || null;
   };
   
   /**
@@ -80,14 +89,23 @@ export const getExistingThreadIdFromURL = (query: ParsedUrlQuery): string | null
    *
    */
   
-  export const getExistingEndpointURLFromURL = (): string | null => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const endpointUrl = urlParams.get('endpointUrl');
-      return endpointUrl;
-    }
+  export const getExistingEndpointURLFromURL = (query: ParsedUrlQuery): string | null => {
+    // if (typeof window !== 'undefined') {
+    //   const urlParams = new URLSearchParams(window.location.search);
+    //   const endpointUrl = urlParams.get('endpointUrl');
+    //   return endpointUrl;
+    // }
     
-    return null;
+    // return null;
+
+    const endpointUrl = query?.endpointUrl;
+  
+    if (Array.isArray(endpointUrl)) {
+    return endpointUrl[0];
+  }
+
+
+    return endpointUrl || null;
   };
   
   
@@ -100,12 +118,22 @@ export const getExistingThreadIdFromURL = (query: ParsedUrlQuery): string | null
    *
    */
   
-  export const getExistingDisplayNameFromURL = (): string | null => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const displayName = urlParams.get('displayName');
-      return displayName;
-    }
+  export const getExistingDisplayNameFromURL = (query: ParsedUrlQuery): string | null => {
+    // if (typeof window !== 'undefined') {
+    //   const urlParams = new URLSearchParams(window.location.search);
+    //   const displayName = urlParams.get('displayName');
+    //   return displayName;
+    // }
+
+    const displayName = query?.displayName;
+  
+    if (Array.isArray(displayName)) {
+    return displayName[0];
+  }
+
+
+    return displayName || null;
+
     
-    return null;
+    // return null;
   };

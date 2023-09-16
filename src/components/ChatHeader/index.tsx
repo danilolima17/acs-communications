@@ -25,6 +25,7 @@ export const ChatHeader = (props: ChatHeaderProps): JSX.Element => {
 
   const leaveString = 'Leave';
   return (
+
     <Stack
       horizontal={true}
       verticalAlign={'center'}
@@ -32,6 +33,7 @@ export const ChatHeader = (props: ChatHeaderProps): JSX.Element => {
       className={chatHeaderContainerStyle}
       role="banner"
     >
+      
       <div className={paneButtonContainerStyle}>{}</div>
       <DefaultButton
         className={mergeStyles(largeLeaveButtonContainerStyle, leaveButtonStyle, {

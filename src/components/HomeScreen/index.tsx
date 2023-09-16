@@ -65,10 +65,10 @@ const HOMESCREEN_SHOWING_LOADING_SPINNER_CREATE_THREAD = 2;
 
 
 export default (): JSX.Element => {
-  const spinnerLabel = 'Creating a new chat thread...';
+  const spinnerLabel = 'Carregando...';
   const iconName = 'SkypeCircleCheck';
   const headerTitle = 'Exceptionally simple chat app';
-  const startChatButtonText = 'Start chat';
+  const startChatButtonText = 'Conversa Iniciada';
   const listItems = [
     'Launch a conversation with a single click',
     'Real-time messaging with indicators',

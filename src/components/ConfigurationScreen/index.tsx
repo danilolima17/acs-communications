@@ -154,10 +154,10 @@ export default (props: ConfigurationScreenProps): JSX.Element => {
         }
         // Check if we have all the required parameters supplied as query search params.
         const threadId = getExistingThreadIdFromURL(router.query);
-        const token = getExistingTokenFromURL();
+        const token = getExistingTokenFromURL(router.query);
         const userId = getExistingUserIdFromURL(router.query);
-        const displayName = getExistingDisplayNameFromURL();
-        const endpointUrl = getExistingEndpointURLFromURL();
+        const displayName = getExistingDisplayNameFromURL(router.query);
+        const endpointUrl = getExistingEndpointURLFromURL(router.query);
 
         if (token && userId && displayName && threadId && endpointUrl) {
           joinChatThreadWithExistingUser(token, userId, displayName, threadId, endpointUrl);
